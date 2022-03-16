@@ -1,0 +1,10 @@
+﻿@page
+@model CursProper.Pages.Organisations.DeleteModel
+@{
+}
+<h1>Удаление</h1>
+<h3>Вы уверены?</h3>
+<form method="post">
+    <input type="submit" value="Удалить" class="btn btn-danger" asp-page-handler="Delete" asp-route-id="@Model.Id" />
+    <a asp-page="./Index">Назад</a>
+</form>

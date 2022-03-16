@@ -1,0 +1,162 @@
+﻿@page
+@model CursProper.Pages.Databases.DetailsModel
+@{
+}
+<h1>
+    Подробности
+</h1>
+<div>
+    <h4>БД</h4>
+     <dl class = "row">
+         <dt class="col-sm-2">
+            Название
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Database.Name_rus
+        </dd>
+        <dt class="col-sm-2">
+            E-mail
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Database.Email
+        </dd>
+        <dt class="col-sm-2">
+            Телефон
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Database.Phone
+        </dd>
+        <dt class="col-sm-2">
+            Ссылка
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Database.URL
+        </dd>
+        <dt class="col-sm-2">
+            Комментарий
+        </dt>
+        <dd class="col-sm-10">
+            @Model.Database.Comment_rus
+        </dd>
+     </dl>
+</div>
+<div>
+    <h4>Литературные источники</h4>
+ @if (Model.References.Count==0)
+ {
+  <text>В БД нет литературных ссылок</text>
+ }else{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Авторы
+            </th>
+            <th>
+                Название
+            </th>
+            <th>
+                Источник
+            </th>
+            <th>
+                Год
+            </th>
+            <th>
+                Том
+            </th>
+            <th>
+                Номер
+            </th>
+            <th>
+                Страницы
+            </th>
+            <th>
+                Действие
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(var item in Model.References)
+            {
+                <tr>
+                    <td>
+                    @foreach(var author in item.Authors)
+                    {
+                        @author.AuthorName
+                    }
+                </td>
+                <td>@item.Article</td>
+                <td>
+                    @item.Source
+                </td>
+                <td>@item.Year</td>
+                <td>
+                    @item.Volume
+                </td>
+                <td>@item.Number</td>
+                <td>@item.Pages</td>
+                <td><a asp-page="DeleteLitRef"asp-route-id="@item.ReferenceId" asp-route-db_id="@Model.Database.Id">Удалить</a> </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+    <a asp-page="./AddLitRef" asp-route-id="@Model.Database.Id">Добавить литературный источник</a>
+</div>
+<div>
+    <h4>Разработчик БД</h4>
+    @if (Model.Organisations.Count == 0)
+    {
+          <text>В БД не указана организация-разработчик</text>
+    }else{
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                Страна
+            </th>
+            <th>
+                Название
+            </th>
+            <th>
+                Адрес
+            </th>
+            <th>
+                Address
+            </th>
+            <th>
+                Действие
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+            @foreach(var item in Model.Organisations)
+            {
+                <tr>
+                    <td>
+                        @item.Country.CountryNameRus
+                    </td>
+                    <td>
+                         @item.NameRus
+                         @item.NameEng
+                    </td>
+                    <td>
+                        @item.AdressRus
+                    </td>
+                    <td>
+                        @item.AdressEng
+                    </td>
+                    <td>
+                        <a asp-page="./OrgDelete" asp-route-id="@item.OrganisationId" asp-route-db_id="@Model.Database.Id">Удалить</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    }
+        <a asp-page="./CreateOrg" asp-route-id="@Model.Database.Id">Добавить организацию</a>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

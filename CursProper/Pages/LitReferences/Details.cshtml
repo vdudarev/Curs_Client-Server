@@ -1,0 +1,80 @@
+﻿@page
+@model CursProper.Pages.LitReferences.DetailsModel
+@{
+}
+
+
+<div>
+    <h4>Базы данных с этим источником</h4>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Контакты
+            </th>
+            <th>
+                Комментарий
+            </th>
+            <th>
+                Действие
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Databases)
+        {
+            <tr>
+                <td>@item.Name_rus</td>
+                <td>
+                    Тел:
+                    @item.Phone
+                    <br>
+                    E-mail:
+                    @item.Email
+                    <br>
+                    URL:
+                    @item.URL
+                </td>
+                <td>@item.Comment_rus</td>
+                <td>
+                <a asp-page="/Databases/Details" asp-route-id="@item.Id">Подробнее</a> 
+                </td>
+            </tr>
+        }
+     </tbody>
+    </table>
+</div>
+<div>
+    <h4>Авторы</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Автор
+                </th>
+                <th>
+                    Действие
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Authors){
+            <tr>
+                <td>
+                    @item.AuthorName
+                </td>
+                <td>
+                    <a asp-page="DeleteAuthorRef" asp-route-id="@item.AuthorId" asp-route-db_id="@Model.Database.ReferenceId">Удалить</a>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+        <a asp-page="./AddAuthorRef" asp-route-id="@Model.Database.ReferenceId">Добавить автора</a>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

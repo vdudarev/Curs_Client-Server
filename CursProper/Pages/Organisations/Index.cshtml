@@ -1,0 +1,66 @@
+﻿@page
+@model CursProper.Pages.Organisations.IndexModel
+@{
+}
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Название
+            </th>
+            <th>
+                Name
+            </th>
+            <th>
+                Аббривеатура
+            </th>
+            <th>
+                Страна
+            </th>
+            <th>
+                Действие
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Databases)
+        {
+            <tr>
+                <td>
+                       @item.NameRus                
+                </td>
+                <td>
+                      @item.NameEng
+
+                </td>
+                <td>
+                    @if (item.AbbreviationEng != null)
+                    {
+                        @item.AbbreviationEng
+                    }
+                    @if(item.AbbreviationRus != null)
+                    {
+                        @item.AbbreviationRus
+                    }
+                </td>
+                <td>
+                    @item.Country.CountryNameRus
+                </td>
+                <td>
+                    <a asp-page="./Delete" asp-route-id="@item.OrganisationId">Удалить</a>
+                </td>
+            </tr>
+        }
+     </tbody>
+    </table>
+    <div>
+        <ul class ="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./Index" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+    </div>

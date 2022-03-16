@@ -1,0 +1,70 @@
+﻿@page
+@model CursProper.Pages.Databases.IndexModel
+@{
+}
+<p>
+    <a asp-page="Create">Создать</a>
+</p>
+<form asp-page="./Index" method="get">
+     <div class="form-actions no-color">
+        <p>
+            Поиск по имени БД:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Найти" class="btn btn-primary" /> |
+            <a asp-page="./Index">Вернуть полный список</a>
+        </p>
+    </div>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                Название
+                </a>
+            </th>
+            <th>
+                Контакты
+            </th>
+            <th>
+                Комментарий
+            </th>
+            <th>
+                Действие
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Databases)
+        {
+            <tr>
+                <td>@item.Name_rus</td>
+                <td>
+                    Тел:
+                    @item.Phone
+                    <br>
+                    E-mail:
+                    @item.Email
+                    <br>
+                    URL:
+                    @item.URL
+                </td>
+                <td>@item.Comment_rus</td>
+                <td>
+                <a asp-page="./Details" asp-route-id="@item.Id">Подробнее</a> 
+                <a asp-page="./Delete" asp-route-id="@item.Id">Удалить</a>
+                </td>
+            </tr>
+        }
+     </tbody>
+    </table>
+    <div>
+        <ul class ="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./Index" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+    </div>

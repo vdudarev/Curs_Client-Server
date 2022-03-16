@@ -1,0 +1,35 @@
+﻿@page
+@model CursProper.Pages.LitReferences.CreateModel
+@{
+}
+<h1>Создать</h1>
+<h4>Литературный источник</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="LitReference.Article" class="control-label"></label>
+                <input asp-for="LitReference.Article" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LitReference.Number" class="control-label"></label>
+                <input asp-for="LitReference.Number" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LitReference.Pages" class="control-label"></label>
+                <input asp-for="LitReference.Pages" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="LitReference.Volume" class="control-label"></label>
+                <input asp-for="LitReference.Volume" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+

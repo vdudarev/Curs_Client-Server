@@ -1,0 +1,46 @@
+﻿@page
+@model CursProper.Pages.LitReferences.AddAuthorRefModel
+@{
+}
+<p>
+    <a asp-page="CreateAuthor">Создать</a>
+</p>
+<div>
+    <a asp-page="./Details"asp-route-id="@Model.Db_id">Назад</a>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Автор
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model.Authors)
+        {
+            <tr>
+                <td>
+                    @item.AuthorName
+                </td>
+                <td>
+                <form method = "post">
+                    <input type="submit" asp-page-handler="SelectItem" asp-route-id="@item.AuthorId" asp-route-db_id="@Model.Db_id"/>
+                </form>
+                <br>
+                <a asp-page="DeleteAuthor" asp-route-id="@item.AuthorId">Удалить</a>
+                </td>
+            </tr>
+        }
+     </tbody>
+ </table>
+     <div>
+        <ul class ="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./AddAuthorRef" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
+    </div>

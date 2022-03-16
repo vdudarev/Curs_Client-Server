@@ -1,0 +1,45 @@
+﻿@page
+@model CursProper.Pages.Databases.AddOrgModel
+@{
+}
+<h1>Создать</h1>
+<h4>Разработчик</h4>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="Org.NameEng" class="control-label"></label>
+                <input asp-for="Org.NameEng" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Org.NameRus" class="control-label"></label>
+                <input asp-for="Org.NameRus" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Org.AbbreviationEng" class="control-label"></label>
+                <input asp-for="Org.AbbreviationEng" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Org.AbbreviationRus" class="control-label"></label>
+                <input asp-for="Org.AbbreviationRus" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Org.AdressEng" class="control-label"></label>
+                <input asp-for="Org.AdressEng" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Org.AdressRus" class="control-label"></label>
+                <input asp-for="Org.AdressRus" class="form-control" />
+            </div>
+            <div class="form-group">
+                <select name="Countries" asp-items="Model.Counties"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" asp-route-db_id="@Model.DB_id" />
+            </div>
+        </form>
+    </div>
+</div>
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
